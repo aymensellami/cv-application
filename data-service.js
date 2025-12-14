@@ -61,11 +61,11 @@ class DataService {
     // Générer des données de démonstration
     generateDemoData() {
         this.cvData = {
-            fullName: "Marie Dubois",
+            fullName: "aymen sellami",
             jobTitle: "Développeuse Full Stack",
-            email: "marie.dubois@email.com",
-            phone: "+33 6 12 34 56 78",
-            address: "Paris, France",
+            email: "aymen.sellami@email.com",
+            phone: "+216 000 000",
+            address: "ARINA, TUNIS",
             summary: "Développeuse Full Stack avec 5 ans d'expérience dans la création d'applications web modernes. Passionnée par les technologies JavaScript et les architectures cloud. Aime résoudre des problèmes complexes et travailler en équipe agile.",
             skills: ["JavaScript", "React", "Node.js", "TypeScript", "MongoDB", "AWS", "Docker", "Git", "Agile/Scrum"],
             experiences: [
@@ -84,14 +84,14 @@ class DataService {
             ],
             educations: [
                 {
-                    degree: "Master en Informatique",
-                    institution: "Université Paris-Saclay",
-                    year: "2018"
+                    degree: "Ingénieur en Informatique",
+                    institution: "ESPRIT",
+                    year: "2015"
                 },
                 {
-                    degree: "Licence en Mathématiques et Informatique",
-                    institution: "Université Paris Descartes",
-                    year: "2016"
+                    degree: "Licence en Informatique",
+                    institution: "ISET",
+                    year: "2010"
                 }
             ]
         };
@@ -135,11 +135,11 @@ class DataService {
     // Obtenir des données par défaut
     getDefaultData() {
         return {
-            fullName: "Jean Martin",
+            fullName: "aymen sellami",
             jobTitle: "Développeur Web",
-            email: "jean.martin@email.com",
-            phone: "+33 6 12 34 56 78",
-            address: "Lyon, France",
+            email: "ay@email.com",
+            phone: "+216 000 000",
+            address: "arina, tunis",
             summary: "Développeur web passionné avec une expérience dans la création d'applications modernes et responsives. Toujours à la recherche de nouveaux défis et technologies à apprendre.",
             skills: ["HTML", "CSS", "JavaScript", "React", "Node.js"],
             experiences: [
@@ -153,7 +153,7 @@ class DataService {
             educations: [
                 {
                     degree: "Licence en Informatique",
-                    institution: "Université de Lyon",
+                    institution: "ISET",
                     year: "2020"
                 }
             ]

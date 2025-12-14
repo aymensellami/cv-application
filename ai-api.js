@@ -9,7 +9,7 @@ class AIModule {
 
     init() {
         this.setupEvents();
-        this.setupAIApi();
+        this.setupAIApi(); // CORRECTION: Appel de la fonction correctement
     }
 
     setupEvents() {
@@ -48,9 +48,15 @@ class AIModule {
     }
 
     setupAIApi() {
-        // Configuration de base pour l'API d'IA
-        this.aiApiEndpoint = './api/mock-ai-api.js';
-        this.isAIAvailable = true; // Pour simuler la disponibilité de l'IA
+        // Configuration simplifiée - pas besoin de chemin vers dossier
+        this.isAIAvailable = true;
+        
+        // Vérifier si l'API existe (si vous utilisez ai-api.js)
+        if (typeof window.MockAIApi !== 'undefined') {
+            console.log('API IA disponible');
+        } else {
+            console.log('Mode simulation IA activé');
+        }
     }
 
     async generateCV(type) {
@@ -98,8 +104,15 @@ class AIModule {
         // Récupérer les données actuelles
         const data = this.dataService.getCurrentData();
         
-        // Générer le CV localement (simulation d'API)
-        return this.generateCVLocally(type, data);
+        // Vérifier si on a une API externe
+        if (typeof window.MockAIApi !== 'undefined' && window.MockAIApi.generateCV) {
+            // Utiliser l'API externe si disponible
+            const result = await window.MockAIApi.generateCV(data, type);
+            return result.cv || result;
+        } else {
+            // Sinon, générer localement
+            return this.generateCVLocally(type, data);
+        }
     }
 
     generateCVLocally(type, customData = null) {
@@ -398,16 +411,6 @@ class AIModule {
             statusElement.style.display = 'none';
         }, 5000);
     }
-    // Après la génération du CV par l'IA
-addExportButton(resultElement) {
-    const exportBtn = document.createElement('button');
-    exportBtn.className = 'btn btn-pdf';
-    exportBtn.innerHTML = '<i class="fas fa-file-pdf"></i> Exporter ce CV en PDF';
-    exportBtn.onclick = () => {
-        pdfService.exportCVToPDF('aiResult', 'cv-ia-genere.pdf');
-    };
-    resultElement.appendChild(exportBtn);
-}
 }
 
 // Initialiser le module IA
