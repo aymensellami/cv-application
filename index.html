@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de CV avec IA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-alt"></i> Générateur de CV Intelligent</h1>
+            <p>Module classique pour la gestion manuelle des données et module IA pour la génération automatique d'un CV professionnel</p>
+        </header>
+        
+        <div class="tabs">
+            <div class="tab active" data-tab="classic">Module Classique</div>
+            <div class="tab" data-tab="ai">Module IA</div>
+            <div class="tab" data-tab="preview">Aperçu du CV</div>
+        </div>
+        
+        <!-- Module Classique -->
+        <div id="classic" class="tab-content active">
+            <h2 class="section-title"><i class="fas fa-edit"></i> Saisie manuelle des données du CV</h2>
+            
+            <div id="statusMessage" class="status-message"></div>
+            
+            <form id="cvForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName">Nom complet *</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Poste recherché *</label>
+                        <input type="text" id="jobTitle" name="jobTitle" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Téléphone *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Adresse</label>
+                    <input type="text" id="address" name="address">
+                </div>
+                
+                <div class="form-group">
+                    <label for="summary">Profil professionnel</label>
+                    <textarea id="summary" name="summary" placeholder="Décrivez votre profil professionnel en quelques lignes..."></textarea>
+                </div>
+                
+                <h3 class="section-title">Expérience professionnelle</h3>
+                <div id="experienceContainer">
+                    <!-- Expériences seront ajoutées dynamiquement -->
+                </div>
+                
+                <button type="button" id="addExperience" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Ajouter une expérience
+                </button>
+                
+                <h3 class="section-title">Formation</h3>
+                <div id="educationContainer">
+                    <!-- Formations seront ajoutées dynamiquement -->
+                </div>
+                
+                <button type="button" id="addEducation" class="btn btn-secondary">
+                    <i class="fas fa-plus"></i> Ajouter une formation
+                </button>
+                
+                <h3 class="section-title">Compétences</h3>
+                <div class="form-group">
+                    <label for="skills">Compétences (séparées par des virgules)</label>
+                    <input type="text" id="skills" name="skills" placeholder="ex: JavaScript, HTML, CSS, Gestion de projet, Communication">
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit" class="btn">
+                        <i class="fas fa-save"></i> Enregistrer les données
+                    </button>
+                    <button type="button" id="loadData" class="btn btn-warning">
+                        <i class="fas fa-upload"></i> Charger les données
+                    </button>
+                    <button type="button" id="clearData" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Effacer toutes les données
+                    </button>
+                </div>
+            </form>
+            
+            <div class="ai-process">
+                <h3><i class="fas fa-robot"></i> Intégration avec le module IA</h3>
+                <p>Les données que vous saisissez ici sont automatiquement sauvegardées et peuvent être utilisées par le module IA pour générer un CV professionnel.</p>
+                <p>Passez à l'onglet "Module IA" pour explorer les fonctionnalités de génération automatique.</p>
+            </div>
+        </div>
+        
+        <!-- Module IA -->
+        <div id="ai" class="tab-content">
+            <h2 class="section-title"><i class="fas fa-robot"></i> Génération automatique de CV avec IA</h2>
+            
+            <div id="aiStatusMessage" class="status-message"></div>
+            
+            <div class="ai-process">
+                <h3><i class="fas fa-magic"></i> Comment fonctionne le module IA ?</h3>
+                <p>Ce module utilise les données que vous avez saisies dans le module classique pour générer automatiquement un CV professionnel et bien structuré.</p>
+                <p>L'IA analyse vos informations et les organise de manière optimale pour créer un CV adapté à votre secteur d'activité.</p>
+                
+                <div class="ai-options">
+                    <div class="ai-option" id="generateSimpleCV">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>CV Simple</h4>
+                        <p>Génère un CV clair et professionnel avec une mise en page standard.</p>
+                    </div>
+                    <div class="ai-option" id="generateModernCV">
+                        <i class="fas fa-bolt"></i>
+                        <h4>CV Moderne</h4>
+                        <p>Crée un CV avec un design contemporain et une structure optimisée.</p>
+                    </div>
+                    <div class="ai-option" id="generateTechCV">
+                        <i class="fas fa-code"></i>
+                        <h4>CV Technique</h4>
+                        <p>Génère un CV adapté aux métiers de la technologie avec accent sur les compétences.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="aiProcessing" class="ai-processing" style="display: none;">
+                <div class="spinner"></div>
+                <h3>Génération du CV en cours...</h3>
+                <p>L'IA est en train de structurer et d'optimiser votre CV professionnel.</p>
+            </div>
+            
+            <div id="aiResult" class="cv-preview" style="display: none;">
+                <!-- Le CV généré par l'IA sera affiché ici -->
+            </div>
+            
+            <div class="button-group">
+                <button id="useExistingData" class="btn">
+                    <i class="fas fa-database"></i> Utiliser les données existantes
+                </button>
+                <button id="simulateAIData" class="btn btn-secondary">
+                    <i class="fas fa-wand-magic-sparkles"></i> Simuler des données IA
+                </button>
+                <button id="callRealAI" class="btn btn-warning">
+                    <i class="fas fa-brain"></i> Appeler une IA réelle (simulation)
+                </button>
+            </div>
+        </div>
+        
+        <!-- Aperçu du CV -->
+        <div id="preview" class="tab-content">
+            <h2 class="section-title"><i class="fas fa-eye"></i> Aperçu du CV</h2>
+            
+            <div id="previewStatusMessage" class="status-message"></div>
+            
+            <div id="cvPreview" class="cv-preview">
+                <p class="text-center">Les données du CV seront affichées ici. Veuillez d'abord saisir vos informations dans le module classique ou utiliser le module IA pour générer un CV.</p>
+            </div>
+            
+            <div class="button-group">
+                <button id="refreshPreview" class="btn">
+                    <i class="fas fa-sync-alt"></i> Actualiser l'aperçu
+                </button>
+                <button id="exportPDF" class="btn btn-secondary">
+                    <i class="fas fa-file-pdf"></i> Exporter en PDF (simulé)
+                </button>
+                <button id="printCV" class="btn btn-warning">
+                    <i class="fas fa-print"></i> Imprimer le CV
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>ESPRIT</p>
+            <p>Module classique + Module IA (simulé) |IA for Software Engineering</p>
+        </footer>
+    </div>
+
+    <script src="./data-service.js"></script>
+<script src="./classic-module.js"></script>
+<script src="./ai-module.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
